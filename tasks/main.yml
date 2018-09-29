@@ -5,10 +5,10 @@
   meta: reset_connection
   tags:
     - provision
-    - provision-docker-container
+    - provision-docker_deployment
 
 - name: Deploy
   include: deploy.yml
   tags:
     - deploy
-    - deploy-docker-container
+    - deploy-docker_deployment

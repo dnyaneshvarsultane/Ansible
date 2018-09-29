@@ -15,7 +15,7 @@ dependencies:
       - provision-docker
 
 galaxy_info:
-  role_name: docker-container
+  role_name: docker_deployment
   author: honomoa
   description: Deploy your docker images.
   company: "Moa"

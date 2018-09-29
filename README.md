@@ -1,4 +1,4 @@
-# Ansible Role: docker-container
+# Ansible Role: docker_deployment
 
 Deploy your docker images.
 
@@ -131,7 +131,7 @@ Mounted volumes of container
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - ${PWD}/data:/data
   roles:
-    - { role: honomoa.docker-container }
+    - { role: honomoa.docker_deployment }
 ```
 
 # License
