@@ -6,9 +6,10 @@ dependencies:
       - provision
       - provision-docker
   - role: honomoa.pip
+    become: yes
     vars:
       pip_packages:
-        - docker
+        - docker-py
         - awscli
     tags:
       - provision
