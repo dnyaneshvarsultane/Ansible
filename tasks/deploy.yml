@@ -1,0 +1,54 @@
+---
+
+- name: Login AWS ECR
+  shell: '$(aws ecr get-login --region {{ registry_region }} | sed "s/-e none//")'
+  environment:
+    AWS_ACCESS_KEY_ID: '{{ aws_access_key_id }}'
+    AWS_SECRET_ACCESS_KEY: '{{ aws_secret_access_key }}'
+  when: registry_type == aws-ecr
+
+- name: Login registry
+  docker_login:
+    registry: '{{ registry_scheme }}://{{ registry_url }}'
+    username: '{{ registry_username }}'
+    password: '{{ registry_password }}'
+    reauthorize: yes
+  when: registry_type == self-hosted
+
+- name: Rename old image
+  shell: 'docker tag {{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }} {{ registry_url }}/{{ image_team }}/{{ image_project }}:old'
+
+- name: Pull latest image
+  docker_image:
+    name: '{{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }}'
+    force: yes
+
+- name: Remove container
+  docker_container:
+    name: '{{ container_name }}'
+    state: absent
+
+- name: Start container
+  docker_container:
+    image: '{{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }}'
+    name: '{{ container_name }}'
+    env: '{{ container_environment }}'
+    volumes: '{{ container_volumes }}'
+    ports: '{{ container_ports }}'
+    state: 'started'
+    restart_policy: '{{ container_restart_policy }}'
+
+- name: Logout registry
+  docker_login:
+    registry: '{{ registry_scheme }}://{{ registry_url }}'
+    state: absent
+
+- name: Remove images
+  docker_image:
+    state: absent
+    name: '{{ registry_url }}/{{ image_team }}/{{ image_project }}'
+    tag: '{{ item }}'
+  with_items:
+    - old
+    - '{{ image_tag }}'
+  ignore_errors: yes

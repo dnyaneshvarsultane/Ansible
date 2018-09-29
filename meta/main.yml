@@ -1,0 +1,32 @@
+---
+
+dependencies:
+  - role: geerlingguy.docker
+    tags:
+      - provision
+      - provision-docker
+  - role: honomoa.pip
+    vars:
+      pip_packages:
+        - docker
+        - awscli
+    tags:
+      - provision
+      - provision-docker
+
+galaxy_info:
+  role_name: docker-container
+  author: honomoa
+  description: Deploy your docker images.
+  company: "Moa"
+  license: "license (CC BY-SA 3.0)"
+  min_ansible_version: 2.4
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  galaxy_tags:
+    - apb
+    - packaging
+    - docker
+    - container

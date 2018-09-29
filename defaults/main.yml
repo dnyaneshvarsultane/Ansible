@@ -1,0 +1,23 @@
+---
+
+# registry_type: aws-ecr
+registry_type: self-hosted
+
+registry_region:
+aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') if registry_type == 'aws-ecr' }}"
+aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') if registry_type == 'aws-ecr' }}"
+
+registry_username: "{{ lookup('env', 'REGISTRY_USERNAME') if registry_type == 'self-hosted' }}"
+registry_password: "{{ lookup('env', 'REGISTRY_PASSWORD') if registry_type == 'self-hosted' }}"
+
+registry_scheme: https
+registry_url:
+image_team:
+image_project:
+image_tag: latest
+
+container_name:
+container_ports: []
+container_restart_policy: always
+container_environment: []
+container_volumes: []
