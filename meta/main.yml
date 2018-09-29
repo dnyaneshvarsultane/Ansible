@@ -2,6 +2,7 @@
 
 dependencies:
   - role: geerlingguy.docker
+    become: yes
     tags:
       - provision
       - provision-docker
