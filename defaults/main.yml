@@ -19,5 +19,6 @@ image_tag: latest
 container_name:
 container_ports: []
 container_restart_policy: always
-container_environment: []
+container_environment:
+  AUTHOR: Moa
 container_volumes: []
