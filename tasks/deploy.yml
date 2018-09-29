@@ -5,7 +5,7 @@
   environment:
     AWS_ACCESS_KEY_ID: '{{ aws_access_key_id }}'
     AWS_SECRET_ACCESS_KEY: '{{ aws_secret_access_key }}'
-  when: registry_type == aws-ecr
+  when: registry_type == 'aws-ecr'
 
 - name: Login registry
   docker_login:
@@ -13,7 +13,7 @@
     username: '{{ registry_username }}'
     password: '{{ registry_password }}'
     reauthorize: yes
-  when: registry_type == self-hosted
+  when: registry_type == 'self-hosted'
 
 - name: Rename old image
   shell: 'docker tag {{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }} {{ registry_url }}/{{ image_team }}/{{ image_project }}:old'
