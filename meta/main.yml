@@ -12,7 +12,7 @@ dependencies:
         - awscli
     tags:
       - provision
-      - provision-docker
+      - provision-pip
 
 galaxy_info:
   role_name: docker_deployment
