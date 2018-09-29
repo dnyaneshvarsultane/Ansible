@@ -15,8 +15,12 @@
     reauthorize: yes
   when: registry_type == 'self-hosted'
 
+- name: Find docker binary path
+  shell: 'PATH=$PATH:/usr/local/bin which docker'
+  register: docker_bin
+
 - name: Rename old image
-  shell: 'docker tag {{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }} {{ registry_url }}/{{ image_team }}/{{ image_project }}:old'
+  shell: '{{ docker_bin.stdout }} tag {{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }} {{ registry_url }}/{{ image_team }}/{{ image_project }}:old'
 
 - name: Pull latest image
   docker_image:
@@ -27,6 +31,8 @@
   docker_container:
     name: '{{ container_name }}'
     state: absent
+  async: 60
+  poll: 5
 
 - name: Start container
   docker_container:
@@ -47,8 +53,5 @@
   docker_image:
     state: absent
     name: '{{ registry_url }}/{{ image_team }}/{{ image_project }}'
-    tag: '{{ item }}'
-  with_items:
-    - old
-    - '{{ image_tag }}'
+    tag: 'old'
   ignore_errors: yes
