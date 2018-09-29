@@ -1,6 +1,10 @@
 ---
 
 - user: name={{ ansible_user }} groups=input
+  tags:
+    - provision
+    - provision-docker_deployment
+
 - name: reset ssh connection to allow user changes to affect 'current login user'
   meta: reset_connection
   tags:
