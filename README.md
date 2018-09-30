@@ -111,6 +111,12 @@ container_volumes: []
 
 Mounted volumes of container
 
+```
+container_extra_hosts:
+```
+
+Add hostname mappings. Use the same values as the docker client --add-host parameter.
+
 # Example Playbook
 
 ```

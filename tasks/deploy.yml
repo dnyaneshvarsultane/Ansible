@@ -41,6 +41,7 @@
     env: '{{ container_environment }}'
     volumes: '{{ container_volumes }}'
     ports: '{{ container_ports }}'
+    etc_hosts: '{{ container_extra_hosts }}'
     state: 'started'
     restart_policy: '{{ container_restart_policy }}'
 

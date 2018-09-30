@@ -22,3 +22,4 @@ container_restart_policy: always
 container_environment:
   AUTHOR: Moa
 container_volumes: []
+container_extra_hosts:
