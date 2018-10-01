@@ -16,6 +16,7 @@ Posible values:
  * aws-ecr
  * self-hosted (like nexus docker registry or docker offical registry)
  * ~~dockerhub~~ (unsupported)
+ * archive-tar (docker save tar file)
 
 ```
 registry_region: us-west-1
@@ -46,6 +47,24 @@ registry_password: "{{ lookup('env', 'REGISTRY_PASSWORD') }}"
 ```
 
 Password of registry, please set an environment `REGISTRY_PASSWORD`, only required in registry_type=self-hosted
+
+```
+archive_username: "{{ lookup('env', 'ARCHIVE_USERNAME') }}"
+```
+
+Username of archive url, please set an environment `ARCHIVE_USERNAME`, only required in archive_type=archive-tar
+
+```
+archive_password: "{{ lookup('env', 'ARCHIVE_PASSWORD') }}"
+```
+
+Password of archive url, please set an environment `ARCHIVE_PASSWORD`, only required in registry_type=archive-tar
+
+```
+archive_url: "{{ lookip('env', 'ARCHIVE_URL') }}"
+```
+
+Url of archive server, without archive tar.gz file name, please set an environment `ARCHIVE_URL`, only required in registry_type=archive-tar
 
 ```
 registry_scheme: https

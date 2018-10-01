@@ -1,13 +1,13 @@
 ---
 
-- name: Login AWS ECR
+- name: REGISTRY Login AWS ECR
   shell: '$(aws ecr get-login --region {{ registry_region }} | sed "s/-e none//")'
   environment:
     AWS_ACCESS_KEY_ID: '{{ aws_access_key_id }}'
     AWS_SECRET_ACCESS_KEY: '{{ aws_secret_access_key }}'
   when: registry_type == 'aws-ecr'
 
-- name: Login registry
+- name: REGISTRY Login registry
   docker_login:
     registry: '{{ registry_scheme }}://{{ registry_url }}'
     username: '{{ registry_username }}'
@@ -21,11 +21,31 @@
 
 - name: Rename old image
   shell: '{{ docker_bin.stdout }} tag {{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }} {{ registry_url }}/{{ image_team }}/{{ image_project }}:old'
+  ignore_errors: yes
 
-- name: Pull latest image
+- name: REGISTRY Pull latest image
   docker_image:
     name: '{{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }}'
     force: yes
+  when: registry_type == 'aws-ecr' or registry_type == 'self-hosted'
+
+- name: ARCHIVE Download archive
+  get_url:
+    url: '{{ archive_url }}/{{ image_project }}-{{ image_tag }}.tar.gz'
+    dest: '/tmp/{{ image_project }}-{{ image_tag }}.tar.gz'
+    url_password: '{{ archive_username }}'
+    url_username: '{{ archive_password }}'
+  when: registry_type == 'archive-tar'
+
+- name: ARCHIVE Unzip archive
+  shell: 'gzip -d -f /tmp/{{ image_project }}-{{ image_tag }}.tar.gz'
+  when: registry_type == 'archive-tar'
+
+- name: ARCHIVE Load latest image
+  docker_image:
+    name: '{{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }}'
+    load_path: '/tmp/{{ image_project }}-{{ image_tag }}.tar'
+  when: registry_type == 'archive-tar'
 
 - name: Remove container
   docker_container:
@@ -56,3 +76,9 @@
     name: '{{ registry_url }}/{{ image_team }}/{{ image_project }}'
     tag: 'old'
   ignore_errors: yes
+
+- name: ARCHIVE Remove archive
+  file:
+    path: '{{ image_project }}-{{ image_tag }}.tar'
+    state: absent
+  when: registry_type == 'archive-tar'

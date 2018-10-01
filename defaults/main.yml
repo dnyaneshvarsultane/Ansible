@@ -1,15 +1,21 @@
 ---
 
-# registry_type: aws-ecr
-registry_type: self-hosted
-
-registry_region:
+# aws-ecr parameters
+registry_type: aws-ecr
+registry_region: us-west-2
 aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') if registry_type == 'aws-ecr' }}"
 aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') if registry_type == 'aws-ecr' }}"
 
+# self-hosted parameters
 registry_username: "{{ lookup('env', 'REGISTRY_USERNAME') if registry_type == 'self-hosted' }}"
 registry_password: "{{ lookup('env', 'REGISTRY_PASSWORD') if registry_type == 'self-hosted' }}"
 
+# archive-tar parameters
+archive_username: "{{ lookup('env', 'ARCHIVE_USERNAME') if registry_type == 'archive-tar' }}"
+archive_password: "{{ lookup('env', 'ARCHIVE_PASSWORD') if registry_type == 'archive-tar' }}"
+archive_url: "{{ lookip('env', 'ARCHIVE_URL') if registry_type == 'archive-tar' }}"
+
+# common parameters
 registry_scheme: https
 registry_url:
 image_team:
