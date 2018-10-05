@@ -136,6 +136,14 @@ container_extra_hosts:
 
 Add hostname mappings. Use the same values as the docker client --add-host parameter.
 
+```
+container_command: ''
+```
+
+Command to run
+
+Sees: (https://docs.docker.com/compose/compose-file/#command)[https://docs.docker.com/compose/compose-file/#command]
+
 # Example Playbook
 
 ```
