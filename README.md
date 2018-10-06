@@ -144,6 +144,12 @@ Command to run
 
 Sees: (https://docs.docker.com/compose/compose-file/#command)[https://docs.docker.com/compose/compose-file/#command]
 
+```
+container_privileged: no
+```
+
+Give extended privileges to this container
+
 # Example Playbook
 
 ```
@@ -163,6 +169,7 @@ Sees: (https://docs.docker.com/compose/compose-file/#command)[https://docs.docke
     container_volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - ${PWD}/data:/data
+    container_privileged: no
   roles:
     - { role: honomoa.docker_deployment }
 ```

@@ -65,6 +65,7 @@
     command: '{{ container_command }}'
     state: 'started'
     restart_policy: '{{ container_restart_policy }}'
+    privileged: '{{ container_privileged }}'
 
 - name: Logout registry
   docker_login:

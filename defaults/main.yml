@@ -30,3 +30,4 @@ container_environment:
 container_volumes: []
 container_extra_hosts:
 container_command: ''
+container_privileged: no
