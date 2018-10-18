@@ -31,3 +31,5 @@ container_volumes: []
 container_extra_hosts:
 container_command: ''
 container_privileged: no
+container_dns_servers: []
+container_dns_search_domains: []

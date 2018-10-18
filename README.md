@@ -119,10 +119,10 @@ container_restart_policy: always
 Restart policy of container
 
 ```
-container_environment: []
+container_environment: {}
 ```
 
-Environment of container
+Environment of container, dictionary of key,value pairs.
 
 ```
 container_volumes: []
@@ -149,6 +149,18 @@ container_privileged: no
 ```
 
 Give extended privileges to this container
+
+```
+container_dns_servers: []
+```
+
+List of custom DNS servers.
+
+```
+container_dns_search_domains: []
+```
+
+List of custom DNS search domains.
 
 # Example Playbook
 
