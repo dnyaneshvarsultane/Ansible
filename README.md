@@ -15,8 +15,8 @@ The registry type.
 Posible values:
  * aws-ecr
  * self-hosted (like nexus docker registry or docker offical registry)
- * ~~dockerhub~~ (unsupported)
  * archive-tar (docker save tar file)
+ * ~~dockerhub~~ (self-hosted), you can set registry_url to `registry.hub.docker.com` and set team to `library` if the image is official support.
 
 ```
 registry_region: us-west-1
