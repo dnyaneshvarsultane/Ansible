@@ -162,6 +162,18 @@ container_dns_search_domains: []
 
 List of custom DNS search domains.
 
+```
+container_network_mode: ''
+```
+
+Connect the container to a network. Choices are "bridge", "host", "none" or "container:<name|id>".
+
+```
+container_capabilities: []
+```
+
+List of capabilities to add to the container.
+
 # Example Playbook
 
 ```
@@ -182,6 +194,9 @@ List of custom DNS search domains.
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - ${PWD}/data:/data
     container_privileged: no
+    container_network_mode: 'bridge'
+    container_capabilities: 
+      - NET_ADMIN
   roles:
     - { role: honomoa.docker_deployment }
 ```

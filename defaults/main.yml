@@ -33,3 +33,5 @@ container_command: ''
 container_privileged: no
 container_dns_servers: []
 container_dns_search_domains: []
+container_network_mode: 'bridge'
+container_capabilities: []
