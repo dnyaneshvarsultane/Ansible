@@ -10,7 +10,7 @@ dependencies:
     become: yes
     vars:
       pip_packages:
-        - docker-py
+        - docker
         - awscli
     tags:
       - provision
