@@ -174,6 +174,16 @@ container_capabilities: []
 
 List of capabilities to add to the container.
 
+```
+container_log_driver: json-file
+```
+
+The container can have a different logging driver than the Docker daemon. Choices are "none", "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
+
+```
+container_log_options:
+```
+
 # Example Playbook
 
 ```
@@ -197,6 +207,10 @@ List of capabilities to add to the container.
     container_network_mode: 'bridge'
     container_capabilities: 
       - NET_ADMIN
+    container_log_driver: json-file
+    container_log_options:
+      max-size: 10m
+      max-file: 3
   roles:
     - { role: honomoa.docker_deployment }
 ```

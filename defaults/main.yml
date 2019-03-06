@@ -35,3 +35,7 @@ container_dns_servers: []
 container_dns_search_domains: []
 container_network_mode: 'bridge'
 container_capabilities: []
+container_log_driver: 'json-file'
+container_log_options:
+  max-size: 10m
+  max-file: 3

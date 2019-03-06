@@ -68,6 +68,8 @@
     state: 'started'
     restart_policy: '{{ container_restart_policy }}'
     privileged: '{{ container_privileged }}'
+    log_driver: '{{ container_log_driver }}'
+    log_options: '{{ container_log_options }}'
 
 - name: Logout registry
   docker_login:
