@@ -125,6 +125,12 @@ container_environment: {}
 Environment of container, dictionary of key,value pairs.
 
 ```
+container_env_file: ''
+```
+
+Path to a file, present on the target, containing environment variables FOO=BAR.
+
+```
 container_volumes: []
 ```
 
@@ -200,6 +206,7 @@ container_log_options:
     container_restart_policy: always
     container_environment:
       HOST_ID: 100
+    container_env_file: xxx.env
     container_volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - ${PWD}/data:/data

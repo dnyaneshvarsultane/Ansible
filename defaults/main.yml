@@ -27,6 +27,7 @@ container_ports: []
 container_restart_policy: always
 container_environment:
   AUTHOR: Moa
+container_env_file:
 container_volumes: []
 container_extra_hosts:
 container_command: ''

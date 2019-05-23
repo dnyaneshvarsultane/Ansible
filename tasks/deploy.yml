@@ -59,6 +59,7 @@
     image: '{{ registry_url }}/{{ image_team }}/{{ image_project }}:{{ image_tag }}'
     name: '{{ container_name }}'
     env: '{{ container_environment }}'
+    env_file: '{{ container_env_file }}'
     volumes: '{{ container_volumes }}'
     ports: '{{ container_ports }}'
     etc_hosts: '{{ container_extra_hosts }}'
