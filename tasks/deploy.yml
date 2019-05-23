@@ -64,6 +64,7 @@
     ports: '{{ container_ports }}'
     etc_hosts: '{{ container_extra_hosts }}'
     command: '{{ container_command }}'
+    network_mode: '{{ container_network_mode }}'
     dns_servers: '{{ container_dns_servers }}'
     dns_search_domains: '{{ container_dns_search_domains }}'
     state: 'started'
