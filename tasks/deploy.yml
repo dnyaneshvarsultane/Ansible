@@ -53,6 +53,7 @@
     state: absent
   async: 60
   poll: 5
+  when: not ansible_check_mode
 
 - name: Start container
   docker_container:
